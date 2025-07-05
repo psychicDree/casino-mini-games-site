@@ -25,5 +25,9 @@ jobs:
         cd client
         npm install
         npm run build --if-present
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
     - name: Docker Compose build
       run: docker-compose build
