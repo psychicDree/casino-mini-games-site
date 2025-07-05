@@ -15,7 +15,7 @@ var db *mongo.Database
 func initMongo() {
 	uri := os.Getenv("MONGO_URI")
 	if uri == "" {
-		uri = "mongodb://localhost:27017"
+		uri = "mongodb+srv://devmanjha:VcLtvS6oWdw7XWMh@web-client-cluster.quyven8.mongodb.net/?retryWrites=true&w=majority&appName=web-client-cluster"
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
