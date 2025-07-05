@@ -8,7 +8,7 @@ services:
     build: ./server
     environment:
       - MONGO_URI=mongodb://mongo:27017
-      - JWT_SECRET=changeme
+      - JWT_SECRET=dev-manish-9599
     ports:
       - "8080:8080"
     depends_on:
