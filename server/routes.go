@@ -22,13 +22,13 @@ func RegisterRoutes(r *mux.Router) {
 
 	r.HandleFunc("/signup", signupHandler).Methods("POST")
 	r.HandleFunc("/login", loginHandler).Methods("POST")
+	r.HandleFunc("/api/games", gamesHandler).Methods("GET") // Public games endpoint
 
 	api := r.PathPrefix("/api").Subrouter()
 	api.Use(authMiddleware)
 	api.HandleFunc("/wallet", getWalletHandler).Methods("GET")
 	api.HandleFunc("/wallet/deposit", depositHandler).Methods("POST")
 	api.HandleFunc("/wallet/withdraw", withdrawHandler).Methods("POST")
-	api.HandleFunc("/games", gamesHandler).Methods("GET")
 	api.HandleFunc("/ws", wsHandler)
 }
 
