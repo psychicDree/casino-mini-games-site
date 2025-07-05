@@ -32,3 +32,16 @@ A Docker Compose file is provided to run MongoDB, the Go server, and the client 
 ```bash
 docker-compose up --build
 ```
+
+## Continuous Deployment
+
+The repository includes a `CD` workflow that builds Docker images for the server and
+client whenever the `CI` workflow succeeds on `main`. Images are published to the
+GitHub Container Registry under your repository. You can pull and run them with:
+
+```bash
+docker pull ghcr.io/<owner>/<repo>/server:latest
+docker pull ghcr.io/<owner>/<repo>/client:latest
+```
+
+Adjust `<owner>/<repo>` to match your GitHub repository name.
