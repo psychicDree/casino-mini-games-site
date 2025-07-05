@@ -9,12 +9,6 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017
       - JWT_SECRET=changeme
-
-  server:
-    build: ./server
-    environment:
-      - MONGO_URI=mongodb://mongo:27017
-      - JWT_SECRET=changeme
     ports:
       - "8080:8080"
     depends_on:
