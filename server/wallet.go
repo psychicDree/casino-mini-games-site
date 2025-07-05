@@ -15,15 +15,26 @@ type walletRequest struct {
 }
 
 func getWalletHandler(w http.ResponseWriter, r *http.Request) {
-	userID := r.Context().Value("userID").(string)
-	objID, err := primitive.ObjectIDFromHex(userID)
-	if err != nil {
-    	http.Error(w, "invalid user id", http.StatusBadRequest)
-    	return
-	}	
-	err = db.Collection("users").FindOne(ctx, bson.M{"_id": objID}).Decode(&user)
-}
+    userID := r.Context().Value("userID").(string)
+    objID, err := primitive.ObjectIDFromHex(userID)
+    if err != nil {
+        http.Error(w, "invalid user id", http.StatusBadRequest)
+        return
+    }
 
+    ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
+    defer cancel()
+
+    var user User // Make sure the User struct is defined appropriately elsewhere in your code
+    err = db.Collection("users").FindOne(ctx, bson.M{"_id": objID}).Decode(&user)
+    if err != nil {
+        http.Error(w, "user not found", http.StatusNotFound)
+        return
+    }
+
+    // Example: return the wallet balance as JSON
+    json.NewEncoder(w).Encode(user.Wallet)
+}
 func depositHandler(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("userID").(string)
 	objID, err := primitive.ObjectIDFromHex(userID)
