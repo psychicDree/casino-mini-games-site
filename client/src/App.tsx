@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
+import Sidebar from './Sidebar'
+import TopBar from './TopBar'
+import HeroCarousel from './views/components/HeroCarousel'
+import GameSection from './views/components/GameSection'
+import AuthModal from './AuthModal'
+import HomePage from './views/pages/HomePage'
 
 interface Game {
   id: string
@@ -16,6 +23,22 @@ interface User {
   }
 }
 
+function FeaturedPage(props: any) {
+  return <GameSection title="Featured games" viewMoreHref="#" games={props.featuredGames} />
+}
+
+function CategoriesPage() {
+  return <div style={{color: 'var(--text-main)', padding: '2rem'}}>Categories page coming soon!</div>
+}
+
+function NewPage(props: any) {
+  return <GameSection title="New games" viewMoreHref="#" games={props.newGames} />
+}
+
+function OriginalsPage(props: any) {
+  return <GameSection title="CrazyGames Originals" viewMoreHref="#" games={props.originals} />
+}
+
 export default function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
   const [user, setUser] = useState<User | null>(null)
@@ -25,6 +48,7 @@ export default function App() {
   const [isLogin, setIsLogin] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showAuthModal, setShowAuthModal] = useState(false)
 
   useEffect(() => {
     if (token) {
@@ -43,7 +67,7 @@ export default function App() {
     }
   }
 
-  const handleAuth = async () => {
+  const handleAuth = async (username: string, password: string, isLogin: boolean) => {
     setLoading(true)
     setError('')
     
@@ -55,8 +79,8 @@ export default function App() {
         localStorage.setItem('token', res.data.token)
         setToken(res.data.token)
         setUser(res.data.user)
+        setShowAuthModal(false)
       } else {
-        setIsLogin(true)
         setError('Account created! Please login.')
       }
     } catch (err: any) {
@@ -73,127 +97,69 @@ export default function App() {
     setGames([])
   }
 
+  // Demo data for game sections
+  const featuredGames = [
+    { title: 'Fragen', image: '🔥', badge: 'Hot' },
+    { title: 'Hook King Runner', image: '🪝', badge: 'Hot' },
+    { title: 'Boom Karts', image: '🏎️' },
+    { title: 'Boxing', image: '🥊' },
+    { title: 'Immortals Revenge', image: '🗡️' },
+    { title: 'Park Town', image: '🌳', badge: 'Hot' },
+  ];
+  const newGames = [
+    { title: 'Merge Rot', image: '🧬', badge: 'New' },
+    { title: 'RBWAR Online', image: '🤖', badge: 'New' },
+    { title: 'Dash Peach-It', image: '🍑', badge: 'New' },
+    { title: 'Redline Idle Front', image: '🚦', badge: 'New' },
+    { title: 'Obby Sprunki', image: '🐱', badge: 'New' },
+    { title: 'Raidfield 2', image: '🪖', badge: 'Updated' },
+  ];
+  const originals = [
+    { title: 'Crazy Miners', image: '⛏️' },
+    { title: 'Space Waves', image: '🌌' },
+    { title: 'Boom Karts', image: '🏎️' },
+    { title: 'Sky Riders', image: '🛩️' },
+    { title: 'EvoWars.io', image: '⚔️' },
+    { title: 'Mini Golf Club', image: '⛳' },
+  ];
+
   if (token && user) {
     return (
-      <div className="app">
-        <nav className="navbar">
-          <div className="nav-brand">🎰 Casino Mini Games</div>
-          <div className="nav-user">
-            <span>Welcome, {user.username}!</span>
-            <span className="wallet">💰 ${user.wallet.balance}</span>
-            <button onClick={logout} className="btn-logout">Logout</button>
+      <BrowserRouter>
+        <div className="app-with-sidebar">
+          <Sidebar />
+          <div className="main-content-with-sidebar">
+            <TopBar user={user} onLogout={logout} onLoginClick={() => setShowAuthModal(true)} />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/featured" element={<FeaturedPage featuredGames={featuredGames} />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/new" element={<NewPage newGames={newGames} />} />
+              <Route path="/originals" element={<OriginalsPage originals={originals} />} />
+            </Routes>
+            <AuthModal open={showAuthModal} onClose={() => setShowAuthModal(false)} onAuth={handleAuth} loading={loading} error={error} />
           </div>
-        </nav>
-        
-        <main className="main-content">
-          <h1 className="games-title">🎮 Available Games</h1>
-          <div className="games-grid">
-            {games.map(game => (
-              <div key={game.id} className="game-card">
-                <div className="game-icon">🎲</div>
-                <h3>{game.name}</h3>
-                <a href={game.url} className="play-btn" target="_blank" rel="noopener noreferrer">
-                  Play Now
-                </a>
-              </div>
-            ))}
-          </div>
-        </main>
-      </div>
+        </div>
+      </BrowserRouter>
     )
   }
 
   return (
-    <div className="landing-page">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            🎰 Welcome to Casino Mini Games
-          </h1>
-          <p className="hero-subtitle">
-            Experience the thrill of classic casino games in a modern, secure environment
-          </p>
-          <div className="hero-features">
-            <div className="feature">
-              <span className="feature-icon">🔒</span>
-              <span>Secure & Fair</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">🎮</span>
-              <span>Multiple Games</span>
-            </div>
-            <div className="feature">
-              <span className="feature-icon">💰</span>
-              <span>Virtual Wallet</span>
-            </div>
-          </div>
+    <BrowserRouter>
+      <div className="app-with-sidebar">
+        <Sidebar />
+        <div className="main-content-with-sidebar">
+          <TopBar onLoginClick={() => setShowAuthModal(true)} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/featured" element={<FeaturedPage featuredGames={featuredGames} />} />
+            <Route path="/categories" element={<CategoriesPage />} />
+            <Route path="/new" element={<NewPage newGames={newGames} />} />
+            <Route path="/originals" element={<OriginalsPage originals={originals} />} />
+          </Routes>
+          <AuthModal open={showAuthModal} onClose={() => setShowAuthModal(false)} onAuth={handleAuth} loading={loading} error={error} />
         </div>
-        <div className="hero-visual">
-          <div className="floating-card card-1">♠️</div>
-          <div className="floating-card card-2">♥️</div>
-          <div className="floating-card card-3">♦️</div>
-          <div className="floating-card card-4">♣️</div>
-        </div>
-      </section>
-
-      {/* Auth Section */}
-      <section className="auth-section">
-        <div className="auth-container">
-          <div className="auth-tabs">
-            <button 
-              className={`auth-tab ${isLogin ? 'active' : ''}`}
-              onClick={() => setIsLogin(true)}
-            >
-              Login
-            </button>
-            <button 
-              className={`auth-tab ${!isLogin ? 'active' : ''}`}
-              onClick={() => setIsLogin(false)}
-            >
-              Sign Up
-            </button>
-          </div>
-          
-          <form className="auth-form" onSubmit={(e) => { e.preventDefault(); handleAuth(); }}>
-            <div className="form-group">
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-                required
-                className="form-input"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-                className="form-input"
-              />
-            </div>
-            
-            {error && <div className="error-message">{error}</div>}
-            
-            <button 
-              type="submit" 
-              className="auth-btn"
-              disabled={loading}
-            >
-              {loading ? 'Loading...' : (isLogin ? 'Login' : 'Sign Up')}
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <p>&copy; 2024 Casino Mini Games. Play responsibly!</p>
-      </footer>
-    </div>
+      </div>
+    </BrowserRouter>
   )
 }

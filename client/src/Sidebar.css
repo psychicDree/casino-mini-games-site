@@ -1,0 +1,156 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 80px;
+  background: var(--bg-navbar);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 200;
+  transition: width 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+}
+
+.sidebar.open {
+  width: 220px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0 2rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-accent);
+  width: 100%;
+  justify-content: center;
+}
+
+.sidebar-logo-icon {
+  font-size: 2rem;
+}
+
+.sidebar-logo-text {
+  display: none;
+}
+
+.sidebar.open .sidebar-logo-text {
+  display: inline;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: center;
+  flex: 1;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  width: 90%;
+  transition: background 0.2s, color 0.2s;
+  justify-content: center;
+}
+
+.sidebar-nav-item:hover, .sidebar-nav-item.active {
+  background: var(--bg-card-hover);
+  color: var(--text-accent);
+}
+
+.sidebar-nav-icon {
+  font-size: 1.5rem;
+}
+
+.sidebar-nav-label {
+  display: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sidebar.open .sidebar-nav-label {
+  display: inline;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
+
+.sidebar-toggle:hover {
+  color: var(--text-accent);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 60px;
+  }
+  .sidebar.open {
+    width: 180px;
+  }
+  .sidebar-logo {
+    font-size: 1rem;
+  }
+  .sidebar-logo-icon {
+    font-size: 1.3rem;
+  }
+  .sidebar-nav-item {
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .sidebar-nav-icon {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 0;
+    min-width: 0;
+    overflow-x: hidden;
+    box-shadow: none;
+    background: var(--bg-navbar);
+    z-index: 300;
+    transition: width 0.3s cubic-bezier(.4,2,.6,1);
+  }
+  .sidebar.open {
+    width: 180px;
+    min-width: 120px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  }
+  .sidebar-logo {
+    margin: 1rem 0;
+  }
+  .sidebar-toggle {
+    position: absolute;
+    top: 1rem;
+    right: -2.5rem;
+    background: var(--bg-navbar);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 301;
+  }
+} 

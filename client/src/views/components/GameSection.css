@@ -1,0 +1,183 @@
+.game-section {
+  margin: 2.5rem 0 1.5rem 0;
+  width: 100%;
+}
+
+.game-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 2rem 1rem 2rem;
+}
+
+.game-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.game-section-viewmore {
+  color: var(--text-accent);
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.game-section-viewmore:hover {
+  color: var(--badge-hot);
+}
+
+.game-section-row {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 2.5rem 2rem;
+  scroll-snap-type: x mandatory;
+  position: static;
+  z-index: auto;
+}
+
+/* Custom scrollbar styling */
+.game-section-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.game-section-row::-webkit-scrollbar-track {
+  background: #1F2030;
+  border-radius: 3px;
+}
+
+.game-section-row::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #7f8cff 0%, #00e6a2 100%);
+  border-radius: 3px;
+  border: 1px solid #1F2030;
+}
+
+.game-section-row::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #8f9cff 0%, #10f6b2 100%);
+}
+
+/* Firefox scrollbar */
+.game-section-row {
+  scrollbar-width: thin;
+  scrollbar-color: #7f8cff #1F2030;
+}
+
+.game-section-card {
+  min-width: 180px;
+  max-width: 200px;
+  height: 120px;
+  background: var(--bg-card-alt);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  position: relative;
+  padding: 1rem 0.8rem 0.8rem 0.8rem;
+  color: var(--text-main);
+  scroll-snap-align: start;
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s cubic-bezier(.22,1,.36,1);
+  cursor: pointer;
+  overflow: visible;
+  z-index: 1;
+}
+
+.game-section-card:hover {
+  transform: translateY(4px) scale(1.07) rotate(-2deg);
+  box-shadow: 0 12px 36px 0 rgba(127,140,255,0.22), 0 0 18px 0 rgba(0,0,0,0.16), 0 0 12px 3px #7f8cff;
+  border: 1.5px solid #7f8cff;
+  background: linear-gradient(135deg, rgba(127,140,255,0.08) 0%, rgba(40,40,40,0.95) 100%);
+  z-index: 99;
+  animation: cardPulseSection 0.7s;
+}
+
+@keyframes cardPulseSection {
+  0% { box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+  50% { box-shadow: 0 20px 48px 0 rgba(127,140,255,0.28), 0 0 24px 0 rgba(0,0,0,0.18); }
+  100% { box-shadow: 0 12px 36px 0 rgba(127,140,255,0.22), 0 0 18px 0 rgba(0,0,0,0.16); }
+}
+
+.game-section-card:active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(127,140,255,0.22);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: rippleSection 0.5s linear;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes rippleSection {
+  0% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 0.3; transform: translate(-50%, -50%) scale(8); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(12); }
+}
+
+.game-section-badge {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.badge-hot {
+  background: var(--badge-hot);
+}
+.badge-new {
+  background: var(--badge-new);
+}
+.badge-updated {
+  background: var(--badge-updated);
+}
+.badge-top-rated {
+  background: var(--text-accent);
+}
+
+.game-section-image {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+}
+
+.game-section-titlecard {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 900px) {
+  .game-section-header {
+    margin: 0 1rem 1rem 1rem;
+  }
+  .game-section-row {
+    padding: 0 1rem;
+    gap: 0.7rem;
+  }
+  .game-section-card {
+    min-width: 120px;
+    max-width: 140px;
+    height: 80px;
+    padding: 0.5rem 0.3rem 0.3rem 0.3rem;
+  }
+  .game-section-image {
+    font-size: 1.2rem;
+  }
+  .game-section-titlecard {
+    font-size: 0.85rem;
+  }
+} 

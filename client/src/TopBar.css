@@ -1,0 +1,189 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 110;
+  min-height: 56px;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.topbar-logo {
+  font-size: 1.7rem;
+}
+
+.topbar-welcome {
+  color: var(--text-accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.topbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-search {
+  width: 320px;
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card-alt);
+  color: var(--text-main);
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.topbar-search:focus {
+  outline: none;
+  border: 1.5px solid var(--text-accent);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.topbar-action {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.topbar-action:hover {
+  color: var(--text-accent);
+}
+
+.topbar-login {
+  background: var(--text-accent);
+  color: var(--text-main);
+  border: none;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.topbar-login:hover {
+  background: var(--badge-hot);
+  color: var(--text-main);
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-left: 1rem;
+}
+
+.topbar-username {
+  color: var(--text-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  background: var(--bg-card-accent);
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+}
+
+.topbar-wallet {
+  background: var(--bg-card-accent2);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+}
+
+.topbar-logout {
+  background: var(--badge-hot);
+  color: var(--text-main);
+  border: none;
+  padding: 0.3rem 0.9rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: 0.3rem;
+}
+
+.topbar-logout:hover {
+  background: var(--text-accent);
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    padding: 0.5rem 1rem;
+  }
+  .topbar-search {
+    width: 180px;
+    font-size: 0.95rem;
+  }
+  .topbar-welcome {
+    font-size: 1rem;
+  }
+  .topbar-action {
+    font-size: 1rem;
+  }
+  .topbar-user {
+    gap: 0.4rem;
+    margin-left: 0.5rem;
+  }
+  .topbar-username, .topbar-wallet {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+  }
+  .topbar-logout {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .topbar-center {
+    order: 2;
+    margin: 0.5rem 0;
+  }
+  .topbar-search {
+    width: 100%;
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+  .topbar-actions {
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .topbar-login {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.8rem;
+  }
+} 
