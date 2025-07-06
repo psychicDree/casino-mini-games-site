@@ -23,11 +23,12 @@ jobs:
           context: ./server
           file: ./server/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/server:latest
+          tags: ghcr.io/psychicdree/casino-mini-games-site/server:latest
+
       - name: Build and push client image
         uses: docker/build-push-action@v5
         with:
           context: ./client
           file: ./client/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/client:latest
+          tags: ghcr.io/psychicdree/casino-mini-games-site/client:latest
