@@ -116,6 +116,32 @@
   z-index: 3;
 }
 
+/* Unity game specific styles */
+.game-section-card.unity-game {
+  background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+  border: 1px solid rgba(102,126,234,0.3);
+}
+
+.game-section-card.unity-game:hover {
+  transform: translateY(4px) scale(1.07) rotate(-2deg);
+  box-shadow: 0 12px 36px 0 rgba(102,126,234,0.25), 0 0 18px 0 rgba(0,0,0,0.16), 0 0 12px 3px #667eea;
+  border: 1.5px solid #667eea;
+  background: linear-gradient(135deg, rgba(102,126,234,0.15) 0%, rgba(118,75,162,0.15) 100%);
+}
+
+.unity-indicator {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.7rem;
+  color: #667eea;
+  font-weight: 600;
+  background: rgba(102,126,234,0.1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  border: 1px solid rgba(102,126,234,0.3);
+}
+
 @keyframes rippleSection {
   0% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
   80% { opacity: 0.3; transform: translate(-50%, -50%) scale(8); }

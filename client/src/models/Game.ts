@@ -4,6 +4,8 @@ export interface IGame {
   url: string;
   type?: string;
   badge?: string;
+  unityBuildPath?: string;
+  isUnityGame?: boolean;
 }
 
 export class Game implements IGame {
@@ -12,13 +14,17 @@ export class Game implements IGame {
   public url: string;
   public type?: string;
   public badge?: string;
+  public unityBuildPath?: string;
+  public isUnityGame?: boolean;
 
-  constructor({ id, name, url, type, badge }: IGame) {
+  constructor({ id, name, url, type, badge, unityBuildPath, isUnityGame }: IGame) {
     this.id = id;
     this.name = name;
     this.url = url;
     this.type = type;
     this.badge = badge;
+    this.unityBuildPath = unityBuildPath;
+    this.isUnityGame = isUnityGame;
   }
 
   get displayName(): string {
@@ -32,6 +38,8 @@ export class Game implements IGame {
       url: data.url,
       type: data.type,
       badge: data.badge,
+      unityBuildPath: data.unityBuildPath,
+      isUnityGame: data.isUnityGame,
     });
   }
 } 

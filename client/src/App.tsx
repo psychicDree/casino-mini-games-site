@@ -8,6 +8,8 @@ import HeroCarousel from './views/components/HeroCarousel'
 import GameSection from './views/components/GameSection'
 import AuthModal from './AuthModal'
 import HomePage from './views/pages/HomePage'
+import UnityWebGLPage from './views/pages/UnityWebGLPage'
+import UnityGamePage from './views/pages/UnityGamePage'
 
 interface Game {
   id: string
@@ -37,6 +39,10 @@ function NewPage(props: any) {
 
 function OriginalsPage(props: any) {
   return <GameSection title="CrazyGames Originals" viewMoreHref="#" games={props.originals} />
+}
+
+function UnityTestPage() {
+  return <UnityWebGLPage buildPath="/unity-builds/test-build" gameName="Unity Test Game" />
 }
 
 export default function App() {
@@ -99,12 +105,12 @@ export default function App() {
 
   // Demo data for game sections
   const featuredGames = [
-    { title: 'Fragen', image: '🔥', badge: 'Hot' },
-    { title: 'Hook King Runner', image: '🪝', badge: 'Hot' },
+    { title: 'Slot Machine', image: '🎰', badge: 'Hot', gameId: 'slot-machine', isUnityGame: true },
+    { title: 'Blackjack', image: '🃏', badge: 'Hot', gameId: 'blackjack', isUnityGame: true },
+    { title: 'Roulette', image: '🎲', badge: 'Hot', gameId: 'roulette', isUnityGame: true },
+    { title: 'Poker', image: '♠️', gameId: 'poker', isUnityGame: true },
+    { title: 'Hook King Runner', image: '🪝' },
     { title: 'Boom Karts', image: '🏎️' },
-    { title: 'Boxing', image: '🥊' },
-    { title: 'Immortals Revenge', image: '🗡️' },
-    { title: 'Park Town', image: '🌳', badge: 'Hot' },
   ];
   const newGames = [
     { title: 'Merge Rot', image: '🧬', badge: 'New' },
@@ -136,6 +142,8 @@ export default function App() {
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/new" element={<NewPage newGames={newGames} />} />
               <Route path="/originals" element={<OriginalsPage originals={originals} />} />
+              <Route path="/unity-test" element={<UnityTestPage />} />
+              <Route path="/game/:gameId" element={<UnityGamePage />} />
             </Routes>
             <AuthModal open={showAuthModal} onClose={() => setShowAuthModal(false)} onAuth={handleAuth} loading={loading} error={error} />
           </div>
@@ -156,6 +164,8 @@ export default function App() {
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/new" element={<NewPage newGames={newGames} />} />
             <Route path="/originals" element={<OriginalsPage originals={originals} />} />
+            <Route path="/unity-test" element={<UnityTestPage />} />
+            <Route path="/game/:gameId" element={<UnityGamePage />} />
           </Routes>
           <AuthModal open={showAuthModal} onClose={() => setShowAuthModal(false)} onAuth={handleAuth} loading={loading} error={error} />
         </div>

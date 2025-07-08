@@ -1,0 +1,26 @@
+// Unity WebGL Data File
+// This is a placeholder for actual Unity WebGL asset data
+// In a real Unity WebGL build, this would be a binary file
+
+{
+  "version": "1.0.0",
+  "buildType": "WebGL",
+  "assets": [
+    {
+      "name": "MainScene",
+      "type": "scene",
+      "size": 1024
+    },
+    {
+      "name": "GameManager",
+      "type": "script",
+      "size": 512
+    },
+    {
+      "name": "Player",
+      "type": "prefab",
+      "size": 2048
+    }
+  ],
+  "totalSize": 3584
+} 
